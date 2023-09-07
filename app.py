@@ -1,6 +1,8 @@
+import subprocess
+
 # Welcome to Project Overhaul.
 
-'''                         This tool is intended to integrate various pen testing tools into a single command line script              '''
+'''                         This tool is intended to integrate various penetration testing tools into a single command line script              '''
 
 '''                         If you forgot what this tool does, just execute it and look at the output, it will guide you   '''
 
@@ -17,123 +19,177 @@ banner = '''
 
 ##############################################################################################################################################################
 
+#                         Text Styles
 
-'''                                                         Function Definitions                                                        '''
+black = "\033[0;30m"
+red = "\033[0;31m"
+green = "\033[0;32m"
+brown = "\033[0;33m"
+blue = "\033[0;34m"
+purple = "\033[0;35m"
+cyan = "\033[0;36m"
+light_gray = "\033[0;37m"
+dark_gray = "\033[1;30m"
+light_red = "\033[1;31m"
+light_green = "\033[1;32m"
+yellow = "\033[1;33m"
+light_blue = "\033[1;34m"
+light_purple = "\033[1;35m"
+light_cyan = "\033[1;36m"
+light_white = "\033[1;37m"
+bold = "\033[1m"
+faint = "\033[2m"
+italic = "\033[3m"
+underline = "\033[4m"
+blink = "\033[5m"
+negative = "\033[7m"
+crossed = "\033[9m"
+reset = "\033[0m"
 
+
+
+
+#                         Main menu
 
 def main_menu():
-    print("")
-    print("               MENU              ")
-    print("              ------                ")
-    print("")
-    print("[1] - Reconnaissance")
-    print("[2] - Exploitation")
-    print("[3] - Miscellaneous")
-    print("[4] - Exit")
-    print("")
+    subprocess.run("clear")
+    print(light_cyan + banner + reset)
+    print()
+    print(light_blue + "               MENU              ")
+    print("              ------                " + reset)
+    print()
+    print(light_green + "[1]" + reset +" - Reconnaissance")
+    print(light_red + "[2]" + reset + " - Exploitation")
+    print(light_purple + "[3]" + reset + " - Miscellaneous")
+    print(light_cyan + "[4]" + reset + " - Exit")
+    print()
     response = input(" >    ")
     
     if response == '1':
+        subprocess.run("clear", shell=True)
         reconnaissance_menu()
 
     elif response == '2':
+        subprocess.run("clear", shell=True)
         exploitation_menu()
     
     elif response == '3':
+        subprocess.run("clear", shell=True)
         miscellaneous_menu()
     
     elif response == '4':
-        print("\nGoodbye!")
+        print(light_cyan + "\nGoodbye!\n" + reset)
     
     else:
-        print("Enter a valid option")
+        subprocess.run("clear", shell=True)
+        print("")
+        print(light_red + "Enter a valid option" + reset)
         main_menu()
 
 
+#                             Reconnaissance menu
 
 def reconnaissance_menu():
-    print("")
-    print("               RECONNAISSANCE               ")
-    print("              ----------------                    ")
-    print("")
-    print("[1] - Nmap")
-    print("[2] - Back to main menu")
-    print("")
+    print()
+    print(light_blue + "               RECONNAISSANCE               ")
+    print("              ----------------                    " + reset)
+    print()
+    print(light_green + "[1]" + reset + " - Nmap")
+    print(light_cyan + "[2]" + reset + " - Back to main menu")
+    print()
 
     response = input(" >    ")
 
     if response == '1':
-        print("Starting Nmap...")
+        print()
+        print(light_green + "Launching nmap..." + reset)
+        print()
+        result = subprocess.run("nmap",stderr=subprocess.DEVNULL, shell=True)
+        if result.returncode != 0:
+            print(light_red + "Error: nmap is not installed" + reset)
 
     elif response == '2':
         main_menu()
     
     else:
-        print("Enter a valid option")
+        print("")
+        print(light_red + "Enter a valid option" + reset)
         reconnaissance_menu()
 
+#                             Exploitation menu
 
 def exploitation_menu():
     print("")
-    print("               EXPLOITATION                ")
-    print("              --------------                   ")
+    print(light_blue + "               EXPLOITATION                   ")
+    print("              --------------                   " + reset)
     print("")
-    print("[1] - Metasploit")
-    print("[2] - SQLmap")
-    print("[3] - amass")
-    print("[4] - ffuf")
-    print("[5] - Dirbuster")
-    print("[6] - Back to main menu")
+    print(light_green + "[1]" + reset + " - Metasploit")
+    print(light_green + "[2]" + reset + " - SQLmap")
+    print(light_green + "[3]" + reset + " - amass")
+    print(light_cyan + "[4]" + reset + " - Back to main menu")
     print("")
 
     response = input(" >    ")
 
     if response == '1':
-        print("Launching Metasploit Framework...")
+        print()
+        print(light_green + "Launching Metasploit Framework..." + reset)
+        print()
+        result = subprocess.run("msfconsole",stderr=subprocess.DEVNULL, shell=True)
+        if result.returncode != 0:
+            print(light_red + "Error: metasploit framework is not installed" + reset)
 
     elif response == '2':
-        print("Launching SQLmap...")
+        print()
+        print(light_green + "Launching SQLmap..." + reset)
+        print()
+        result = subprocess.run("sqlmap",stderr=subprocess.DEVNULL, shell=True)
+        if result.returncode != 0:
+            print(light_red + "Error: sqlmap is not installed" + reset)
 
     elif response == '3':
-        print("Launching Amass...")
+        print()
+        print(light_green + "Launching amass..." + reset)
+        print()
+        result = subprocess.run("amass",stderr=subprocess.DEVNULL, shell=True)
+        if result.returncode != 0:
+            print(light_red + "Error: amass is not installed" + reset)
 
     elif response == '4':
-        print("Launching FFUF...")
-
-    elif response == '5':
-        print("Launching Dirbuster...")
-
-    elif response == '6':
         main_menu()
     
     else:
-        print("Enter a valid option")
+        print()
+        print(light_red + "Enter a valid option" + reset)
         exploitation_menu()
 
+#                             Miscellaneous menu
 
 def miscellaneous_menu():
-    print("")
-    print("               MISCELLANEOUS               ")
-    print("              ---------------                    ")
-    print("")
-    print("[1] - Display Banner")
-    print("[2] - Back to main menu")
-    print("")
+    print()
+    print(light_blue + "               MISCELLANEOUS               ")
+    print("              ---------------                    " + reset)
+    print()
+    print(light_green + "[1]" + reset + " - Display Banner")
+    print(light_cyan + "[2]" + reset + " - Back to main menu")
+    print()
 
     response = input(" >    ")
 
     if response == '1':
-        print(banner)
-
+        print(light_cyan + banner + reset)
+        miscellaneous_menu()
     elif response == '2':
         main_menu()
     
     else:
-        print("Enter a valid option")
+        print("")
+        print(light_red + "Enter a valid option" + reset)
         miscellaneous_menu()
 
 
 
 
-print(banner)
+
+#                           Running code
 main_menu() 
