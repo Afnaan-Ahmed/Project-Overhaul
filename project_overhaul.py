@@ -107,6 +107,17 @@ def reconnaissance_menu():
         result = subprocess.run("nmap",stderr=subprocess.DEVNULL, shell=True)
         if result.returncode != 0:
             print(light_red + "Error: nmap is not installed" + reset)
+            install = input("Do you wish to install nmap? (requires sudo password)")
+            if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
+                print(light_green + "Installing Nmap..." + reset)
+                result = subprocess.run("sudo apt update && sudo apt install nmap",shell=True)
+                if result.returncode == 0:
+                    print(light_green + "Nmap has been successfully installed" + reset)
+                    reconnaissance_menu()
+                else:
+                    print(light_red + "Could not install nmap! Please install it manually" + reset)
+            else:
+                reconnaissance_menu()
 
     elif response == '2':
         main_menu()
@@ -138,6 +149,17 @@ def exploitation_menu():
         result = subprocess.run("msfconsole",stderr=subprocess.DEVNULL, shell=True)
         if result.returncode != 0:
             print(light_red + "Error: metasploit framework is not installed" + reset)
+            install = input("Do you wish to install Metasploit Framework? (requires sudo password)")
+            if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
+                print(light_green + "Installing Metasploit Framework..." + reset)
+                result = subprocess.run("curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall",shell=True)
+                if result.returncode == 0:
+                    print(light_green + "Metasploit Framework has been successfully installed" + reset)
+                    exploitation_menu()
+                else:
+                    print(light_red + "Could not install Metasploit Framework! Please install it manually" + reset)
+            else:
+                exploitation_menu()
 
     elif response == '2':
         print()
@@ -146,6 +168,17 @@ def exploitation_menu():
         result = subprocess.run("sqlmap",stderr=subprocess.DEVNULL, shell=True)
         if result.returncode != 0:
             print(light_red + "Error: sqlmap is not installed" + reset)
+            install = input("Do you wish to install sqlmap? (requires sudo password)")
+            if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
+                print(light_green + "Installing sqlmap..." + reset)
+                result = subprocess.run("sudo apt update && sudo apt install sqlmap",shell=True)
+                if result.returncode == 0:
+                    print(light_green + "sqlmap has been successfully installed" + reset)
+                    exploitation_menu()
+                else:
+                    print(light_red + "Could not install sqlmap! Please install it manually" + reset)
+            else:
+                exploitation_menu()
 
     elif response == '3':
         print()
@@ -154,6 +187,17 @@ def exploitation_menu():
         result = subprocess.run("amass",stderr=subprocess.DEVNULL, shell=True)
         if result.returncode != 0:
             print(light_red + "Error: amass is not installed" + reset)
+            install = input("Do you wish to install amass? (requires sudo password)")
+            if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
+                print(light_green + "Installing amass..." + reset)
+                result = subprocess.run("sudo apt update && sudo apt install amass",shell=True)
+                if result.returncode == 0:
+                    print(light_green + "amass has been successfully installed" + reset)
+                    exploitation_menu()
+                else:
+                    print(light_red + "Could not install amass! Please install it manually" + reset)
+            else:
+                exploitation_menu()
 
     elif response == '4':
         main_menu()
@@ -171,7 +215,8 @@ def miscellaneous_menu():
     print("              ---------------                    " + reset)
     print()
     print(light_green + "[1]" + reset + " - Display Banner")
-    print(light_cyan + "[2]" + reset + " - Back to main menu")
+    print(light_green + "[2]" + reset + " - Install all tools included in project overhaul")
+    print(light_cyan + "[3]" + reset + " - Back to main menu")
     print()
 
     response = input(" >    ")
@@ -179,7 +224,53 @@ def miscellaneous_menu():
     if response == '1':
         print(light_cyan + banner + reset)
         miscellaneous_menu()
+
     elif response == '2':
+        print(light_green + "Installing all tools, This may take a while..." + reset)
+        noerrors = True
+        subprocess.run("sudo apt update",shell=True)
+        
+        #nmap
+        print(light_green + "Installing nmap..." + reset)
+        result = subprocess.run("sudo apt install nmap",shell=True)
+        if result.returncode == 0:
+            print(light_green + "Nmap has been successfully installed" + reset)
+        else:
+            print(light_red + "Could not install nmap! Please install it manually" + reset)
+            noerrors = False
+        
+        #metasploit
+        result = subprocess.run("curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall",shell=True)
+        if result.returncode == 0:
+            print(light_green + "Metasploit Framework has been successfully installed" + reset)
+        else:
+            print(light_red + "Could not install Metasploit Framework! Please install it manually" + reset)
+            noerrors = False
+        
+        #sqlmap
+        print(light_green + "Installing sqlmap..." + reset)
+        result = subprocess.run("sudo apt install sqlmap",shell=True)
+        if result.returncode == 0:
+            print(light_green + "sqlmap has been successfully installed" + reset)
+        else:
+            print(light_red + "Could not install sqlmap! Please install it manually" + reset)
+            noerrors = False
+        
+        #amass
+        print(light_green + "Installing amass..." + reset)
+        result = subprocess.run("sudo apt update && sudo apt install amass",shell=True)
+        if result.returncode == 0:
+            print(light_green + "amass has been successfully installed" + reset)
+        else:
+            print(light_red + "Could not install amass! Please install it manually" + reset)
+            noerrors = False
+
+        if noerrors == True:
+            print(light_green + "All tools have been installed!" + reset)
+        else:
+            print(light_red + "one or more tools were not installed due to an error!" + reset)
+
+    elif response == '3':
         main_menu()
     
     else:
@@ -191,5 +282,11 @@ def miscellaneous_menu():
 
 
 
+
+
+
 #                           Running code
-main_menu() 
+try:
+    main_menu()
+except KeyboardInterrupt:
+    print(light_red + "Program was interrupted by the user" + reset)
