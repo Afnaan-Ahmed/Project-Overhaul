@@ -155,8 +155,7 @@ def exploitation_menu():
     print("")
     print(light_green + "[1]" + reset + " - Metasploit")
     print(light_green + "[2]" + reset + " - SQLmap")
-    print(light_green + "[3]" + reset + " - amass")
-    print(light_cyan + "[4]" + reset + " - Back to main menu")
+    print(light_cyan + "[3]" + reset + " - Back to main menu")
     print("")
 
     response = input(" >    ")
@@ -190,7 +189,7 @@ def exploitation_menu():
             install = input("Do you wish to install sqlmap? (requires sudo password)")
             if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
                 print(light_green + "Installing sqlmap..." + reset)
-                result = subprocess.run("sudo apt update && sudo apt install sqlmap",shell=True)
+                result = subprocess.run("sudo apt update && sudo apt install python3-pip && sudo pip3 install sqlmap",shell=True)
                 if result.returncode == 0:
                     print(light_green + "sqlmap has been successfully installed" + reset)
                     exploitation_menu()
@@ -200,25 +199,6 @@ def exploitation_menu():
                 exploitation_menu()
 
     elif response == '3':
-        print()
-        print(light_green + "Launching amass..." + reset)
-        print()
-        result = subprocess.run("amass",stderr=subprocess.DEVNULL, shell=True)
-        if result.returncode != 0:
-            print(light_red + "Error: amass is not installed" + reset)
-            install = input("Do you wish to install amass? (requires sudo password)")
-            if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
-                print(light_green + "Installing amass..." + reset)
-                result = subprocess.run("sudo apt update && sudo apt install amass",shell=True)
-                if result.returncode == 0:
-                    print(light_green + "amass has been successfully installed" + reset)
-                    exploitation_menu()
-                else:
-                    print(light_red + "Could not install amass! Please install it manually" + reset)
-            else:
-                exploitation_menu()
-
-    elif response == '4':
         main_menu()
     
     else:
@@ -251,7 +231,7 @@ def miscellaneous_menu():
         
         #nmap
         print(light_green + "Installing nmap..." + reset)
-        result = subprocess.run("sudo apt install nmap",shell=True)
+        result = subprocess.run("sudo apt install nmap -y",shell=True)
         if result.returncode == 0:
             print(light_green + "Nmap has been successfully installed" + reset)
         else:
@@ -268,21 +248,13 @@ def miscellaneous_menu():
         
         #sqlmap
         print(light_green + "Installing sqlmap..." + reset)
-        result = subprocess.run("sudo apt install sqlmap",shell=True)
+        result = subprocess.run("sudo apt install python3-pip -y && sudo pip3 install sqlmap -y",shell=True)
         if result.returncode == 0:
             print(light_green + "sqlmap has been successfully installed" + reset)
         else:
             print(light_red + "Could not install sqlmap! Please install it manually" + reset)
             noerrors = False
         
-        #amass
-        print(light_green + "Installing amass..." + reset)
-        result = subprocess.run("sudo apt update && sudo apt install amass",shell=True)
-        if result.returncode == 0:
-            print(light_green + "amass has been successfully installed" + reset)
-        else:
-            print(light_red + "Could not install amass! Please install it manually" + reset)
-            noerrors = False
 
         if noerrors == True:
             print(light_green + "All tools have been installed!" + reset)
