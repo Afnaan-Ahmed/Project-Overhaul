@@ -1,4 +1,8 @@
+#!/usr/bin/python3
+
 import subprocess
+from time import sleep
+
 
 # Welcome to Project Overhaul.
 
@@ -101,23 +105,38 @@ def reconnaissance_menu():
     response = input(" >    ")
 
     if response == '1':
+        subprocess.run("clear", shell=True)
+        print(light_blue + "               Mode               ")
+        print("              -------                  " + reset)
         print()
-        print(light_green + "Launching nmap..." + reset)
+        print(light_green + "[1]" + reset + " - Nmap Payload Generator")
+        print(light_cyan + "[2]" + reset + " - Launch Nmap")
         print()
-        result = subprocess.run("nmap",stderr=subprocess.DEVNULL, shell=True)
-        if result.returncode != 0:
-            print(light_red + "Error: nmap is not installed" + reset)
-            install = input("Do you wish to install nmap? (requires sudo password)")
-            if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
-                print(light_green + "Installing Nmap..." + reset)
-                result = subprocess.run("sudo apt update && sudo apt install nmap",shell=True)
-                if result.returncode == 0:
-                    print(light_green + "Nmap has been successfully installed" + reset)
-                    reconnaissance_menu()
+
+        response = input(" >    ")
+
+        if response == '1':
+            print()
+            nmap_payload_generator()
+            reconnaissance_menu()
+        elif response == '2':
+            print()
+            print(light_green + "Launching nmap..." + reset)
+            print()
+            result = subprocess.run("nmap",stderr=subprocess.DEVNULL, shell=True)
+            if result.returncode != 0:
+                print(light_red + "Error: nmap is not installed" + reset)
+                install = input("Do you wish to install nmap? (requires sudo password)")
+                if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
+                    print(light_green + "Installing Nmap..." + reset)
+                    result = subprocess.run("sudo apt update && sudo apt install nmap",shell=True)
+                    if result.returncode == 0:
+                        print(light_green + "Nmap has been successfully installed" + reset)
+                        reconnaissance_menu()
+                    else:
+                        print(light_red + "Could not install nmap! Please install it manually" + reset)
                 else:
-                    print(light_red + "Could not install nmap! Please install it manually" + reset)
-            else:
-                reconnaissance_menu()
+                    reconnaissance_menu()
 
     elif response == '2':
         main_menu()
@@ -277,6 +296,159 @@ def miscellaneous_menu():
         print("")
         print(light_red + "Enter a valid option" + reset)
         miscellaneous_menu()
+
+
+
+
+
+def nmap_payload_generator():
+    payload = "sudo nmap"
+    subprocess.run("clear")
+    print(light_cyan +"Scan type:"+reset)
+    print(f'''
+{light_green}[1] {reset}- TCP SYN port scan (Default)
+{light_green}[2] {reset}- TCP connect port scan (Default without root privilege)
+{light_green}[3] {reset}- UDP port scan
+{light_green}[4] {reset}- TCP ACK port scan
+{light_green}[5] {reset}- TCP Window port scan
+{light_green}[6] {reset}- TCP Maimon port scan
+{light_green}[7] {reset}- Skip''')
+    response = input("> ")
+    if response not in ['1','2','3','4','5','6','7','8','9']:
+        print(light_red+"Invalid input, skipping..."+reset)
+        sleep(0.7)
+
+    dictionary = {
+        '1':'-sS',
+        '2':'-sT',
+        '3':'-sU',
+        '4':'-sA',
+        '5':'-sW',
+        '6':'-sM',
+        '7':'',
+    }
+    try:
+        payload += ' '+dictionary[response]
+    except:
+        print()
+    
+    subprocess.run("clear")
+    print(light_cyan+"Host Discovery:"+reset)
+    print(f'''
+{light_green}[1] {reset}- No Scan. List targets only
+{light_green}[2] {reset}- Disable port scanning. Host discovery only.
+{light_green}[3] {reset}- Disable host discovery. Port scan only.
+{light_green}[4] {reset}- TCP SYN discovery on port x. Port 80 by default
+{light_green}[5] {reset}- TCP ACK discovery on port x. Port 80 by default
+{light_green}[6] {reset}- UDP discovery on port x. Port 40125 by default
+{light_green}[7] {reset}- ARP discovery on local network
+{light_green}[8] {reset}- Never Do DNS resolution
+{light_green}[9] {reset}- Skip
+''')
+    response = input("> ")
+    if response not in ['1','2','3','4','5','6','7','8','9']:
+        print(light_red+"Invalid input, skipping..."+reset)
+        sleep(0.7)
+
+    dictionary = {
+        '1':'-sL',
+        '2':'-sn',
+        '3':'-Pn',
+        '4':'-PS',
+        '5':'-PA',
+        '6':'-PU',
+        '7':'-PR',
+        '8':'-n',
+        '9':'',
+    }
+    try:
+        payload += ' '+dictionary[response]
+    except:
+        print()
+    
+    subprocess.run("clear")
+    print(light_cyan + "Service and Version Detection:" + reset)
+    print(f'''
+{light_green}[1] {reset}- Detect OS 
+{light_green}[2] {reset}- Detect Version of service
+{light_green}[3] {reset}- Enables OS detection, version detection, script scanning, and traceroute
+''')
+    response = input("> ")
+    if response not in ['1','2','3','4','5','6','7','8','9']:
+        print(light_red+"Invalid input, skipping..."+reset)
+        sleep(0.7)
+
+    dictionary = {
+        '1':'-O',
+        '2':'-sV',
+        '3':'-A',
+        }
+    try:
+        payload += ' '+dictionary[response]
+    except:
+        print()
+
+    subprocess.run("clear")
+    print(light_cyan + "Scan Speed" + reset)
+    print(f'''
+{light_green}[1] {reset}- Paranoid - Intrusion Detection System evasion
+{light_green}[2] {reset}- Sneaky - Intrusion Detection System evasion
+{light_green}[3] {reset}- Polite - slows down the scan to use less bandwidth and use less target machine resources
+{light_green}[4] {reset}- Normal - which is default speed
+{light_green}[5] {reset}- Aggressive - speeds scans; assumes you are on a reasonably fast and reliable network
+{light_green}[6] {reset}- Insane - speeds scan; assumes you are on an extraordinarily fast network
+''')
+    response = input("> ")
+    if response not in ['1','2','3','4','5','6','7','8','9']:
+        print(light_red+"Invalid input, skipping..."+reset)
+        sleep(0.7)
+
+    dictionary = {
+        '1':'-T0',
+        '2':'-T1',
+        '3':'-T2',
+        '4':'-T3',
+        '5':'-T4',
+        '6':'-T5',
+        }
+    try:
+        payload += ' '+dictionary[response]
+    except:
+        print()
+    
+
+    subprocess.run("clear")
+    print(light_cyan + "Scripts:" + reset)
+    print(f'''
+{light_green}[1] {reset}- Scan with default NSE scripts. Considered useful for discovery and safe
+{light_green}[2] {reset}- Scan for vulnerabilities 
+{light_green}[3] {reset}- Use only safe scripts
+{light_green}[4] {reset}- Use intrusive scripts. Considered unsafe.
+{light_green}[5] {reset}- Skip
+''')
+    response = input("> ")
+    if response not in ['1','2','3','4','5','6','7','8','9']:
+        print(light_red+"Invalid input, skipping..."+reset)
+        sleep(0.7)
+
+    dictionary = {
+        '1':'-sC',
+        '2':'--script=vuln',
+        '3':'--script=safe',
+        '4':'--script=intrusive',
+        '5':'',
+        }
+    try:
+        payload += ' '+dictionary[response]
+    except:
+        print()
+
+    
+    print()          
+    print("Your payload is: "+light_green+ payload +" <IP address/range>" + reset)
+    print("Replace <IP address/range>")
+    print()
+
 
 
 
