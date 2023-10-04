@@ -372,6 +372,7 @@ def nmap_payload_generator():
 {light_green}[1] {reset}- Detect OS 
 {light_green}[2] {reset}- Detect Version of service
 {light_green}[3] {reset}- Enables OS detection, version detection, script scanning, and traceroute
+{light_green}[7] {reset}- Skip
 ''')
     response = input("> ")
     if response not in ['1','2','3','4','5','6','7','8','9']:
@@ -382,6 +383,7 @@ def nmap_payload_generator():
         '1':'-O',
         '2':'-sV',
         '3':'-A',
+        '4':'',
         }
     try:
         payload += ' '+dictionary[response]
@@ -397,6 +399,7 @@ def nmap_payload_generator():
 {light_green}[4] {reset}- Normal - which is default speed
 {light_green}[5] {reset}- Aggressive - speeds scans; assumes you are on a reasonably fast and reliable network
 {light_green}[6] {reset}- Insane - speeds scan; assumes you are on an extraordinarily fast network
+{light_green}[7] {reset}- Skip
 ''')
     response = input("> ")
     if response not in ['1','2','3','4','5','6','7','8','9']:
@@ -410,6 +413,7 @@ def nmap_payload_generator():
         '4':'-T3',
         '5':'-T4',
         '6':'-T5',
+        '7':'',
         }
     try:
         payload += ' '+dictionary[response]
