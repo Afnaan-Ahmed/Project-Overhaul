@@ -91,6 +91,10 @@ def main_menu():
         main_menu()
 
 
+
+
+
+
 #                             Reconnaissance menu
 
 def reconnaissance_menu():
@@ -146,6 +150,11 @@ def reconnaissance_menu():
         print(light_red + "Enter a valid option" + reset)
         reconnaissance_menu()
 
+
+
+
+
+
 #                             Exploitation menu
 
 def exploitation_menu():
@@ -155,7 +164,8 @@ def exploitation_menu():
     print("")
     print(light_green + "[1]" + reset + " - Metasploit")
     print(light_green + "[2]" + reset + " - SQLmap")
-    print(light_cyan + "[3]" + reset + " - Back to main menu")
+    print(light_green + "[3]" + reset + " - John The Ripper")
+    print(light_cyan + "[4]" + reset + " - Back to main menu")
     print("")
 
     response = input(" >    ")
@@ -199,12 +209,35 @@ def exploitation_menu():
                 exploitation_menu()
 
     elif response == '3':
+        print()
+        print(light_green + "Launching John The Ripper..." + reset)
+        print()
+        result = subprocess.run("john",stderr=subprocess.DEVNULL, shell=True)
+        if result.returncode != 0:
+            print(light_red + "Error: John the ripper is not installed" + reset)
+            install = input("Do you wish to install John The Ripper? (requires sudo password)")
+            if install in ['YES','Y','yes','y','1','Yes','yES','yEs','YeS']:
+                print(light_green + "Installing John The Ripper..." + reset)
+                result = subprocess.run("sudo apt update && sudo apt install john",shell=True)
+                if result.returncode == 0:
+                    print(light_green + "John The Ripper has been successfully installed" + reset)
+                    exploitation_menu()
+                else:
+                    print(light_red + "Could not install John The Ripper! Please install it manually" + reset)
+            else:
+                exploitation_menu()
+    
+
+    elif response == '4':
         main_menu()
     
     else:
         print()
         print(light_red + "Enter a valid option" + reset)
         exploitation_menu()
+
+
+
 
 #                             Miscellaneous menu
 
@@ -254,6 +287,15 @@ def miscellaneous_menu():
         else:
             print(light_red + "Could not install sqlmap! Please install it manually" + reset)
             noerrors = False
+
+        #John The Ripper
+        print(light_green + "Installing John The Ripper..." + reset)
+        result = subprocess.run("sudo apt install john -y",shell=True)
+        if result.returncode == 0:
+            print(light_green + "John the ripper has been successfully installed" + reset)
+        else:
+            print(light_red + "Could not install John The Ripper! Please install it manually" + reset)
+            noerrors = False
         
 
         if noerrors == True:
@@ -271,6 +313,9 @@ def miscellaneous_menu():
 
 
 
+
+
+#                       Nmap Payload Generator
 
 
 def nmap_payload_generator():
