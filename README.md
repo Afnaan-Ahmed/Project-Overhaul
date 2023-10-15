@@ -4,7 +4,7 @@ Project Overhaul is a versatile command-line tool written in Python that brings 
 
 ![main](https://github.com/Afnaan-Ahmed/Project-Overhaul/assets/86115809/f48a2a83-5c34-4a23-a687-849464dc10fc)
 ![recon](https://github.com/Afnaan-Ahmed/Project-Overhaul/assets/86115809/97dacec1-1ec6-4908-9d92-f491f645eaee)
-![exp](https://github.com/Afnaan-Ahmed/Project-Overhaul/assets/86115809/dd4edc49-e746-49c1-b329-963ea365e1e5)
+![exp](https://github.com/Afnaan-Ahmed/Project-Overhaul/assets/86115809/7169e1ad-5fe1-403c-9558-37023f306ff9)
 ![misc](https://github.com/Afnaan-Ahmed/Project-Overhaul/assets/86115809/078a8988-1cb9-4d28-9cde-9451bc8d1b68)
 
 
