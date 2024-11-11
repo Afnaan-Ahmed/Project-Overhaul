@@ -12,7 +12,8 @@ def main_menu():
     print(c.light_red + "[2]" + c.reset + " - Exploitation")
     print(c.light_purple + "[3]" + c.reset + " - Miscellaneous")
     print(c.light_cyan + "[4]" + c.reset + " - Exit")
-
+    print()
+    
     response = input(" >    ")
     if response == '1':
         reconnaissance_menu()
@@ -28,14 +29,27 @@ def main_menu():
 
 def reconnaissance_menu():
     print(c.light_blue + "               RECONNAISSANCE              " + c.reset)
-    print(c.light_green + "[1]" + c.reset + " - Nmap")
-    print(c.light_cyan + "[2]" + c.reset + " - Back to main menu")
+    print(c.light_green + "[1]" + c.reset + " - Whois - (passive)")
+    print(c.light_green + "[2]" + c.reset + " - NSlookup - (passive)")
+    print(c.light_green + "[3]" + c.reset + " - Nmap - (active)")
+    print(c.light_green + "[4]" + c.reset + " - Netcat - (active)")
+    print(c.light_cyan + "[5]" + c.reset + " - Back to main menu")
+    print()
 
     response = input(" >    ")
     if response == '1':
+        tools.launch_whois()
+        main_menu()
+    elif response == '2':
+        tools.launch_nslookup()
+        main_menu()
+    elif response == '3':
         tools.launch_nmap()
         main_menu()  # Return to the main menu after launching the tool
-    elif response == '2':
+    elif response == '4':
+        tools.launch_netcat()
+        main_menu()
+    elif response == '5':
         main_menu()
     else:
         print(c.light_red + "Enter a valid option" + c.reset)
@@ -45,9 +59,11 @@ def exploitation_menu():
     print(c.light_blue + "               EXPLOITATION                " + c.reset)
     print(c.light_green + "[1]" + c.reset + " - Metasploit")
     print(c.light_green + "[2]" + c.reset + " - SQLmap")
-    print(c.light_green + "[3]" + c.reset + " - John The Ripper")
-    print(c.light_green + "[4]" + c.reset + " - Aircrack-ng")
-    print(c.light_cyan + "[5]" + c.reset + " - Back to main menu")
+    print(c.light_green + "[3]" + c.reset + " - Hashcat")
+    print(c.light_green + "[4]" + c.reset + " - John The Ripper")
+    print(c.light_green + "[5]" + c.reset + " - Aircrack-ng")
+    print(c.light_cyan + "[6]" + c.reset + " - Back to main menu")
+    print()
 
     response = input(" >    ")
     if response == '1':
@@ -55,14 +71,17 @@ def exploitation_menu():
         main_menu()  # Return to the main menu after launching the tool
     elif response == '2':
         tools.launch_sqlmap()
-        main_menu()  # Return to the main menu after launching the tool
+        main_menu()  
     elif response == '3':
-        tools.launch_john()
-        main_menu()  # Return to the main menu after launching the tool
+        tools.launch_hashcat()
+        main_menu()
     elif response == '4':
-        tools.launch_aircrack()
-        main_menu()  # Return to the main menu after launching the tool
+        tools.launch_john()
+        main_menu()  
     elif response == '5':
+        tools.launch_aircrack()
+        main_menu()
+    elif response == '6':
         main_menu()
     else:
         print(c.light_red + "Enter a valid option" + c.reset)
