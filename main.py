@@ -3,7 +3,7 @@ import os
 import tools  # Correct import statement
 
 from utils import banner, color as c
-
+tools.check_gnome_terminal()
 def main_menu():
     subprocess.run("clear")
     print(c.light_cyan + banner.banner_text + c.reset)
@@ -102,13 +102,18 @@ def exploitation_menu():
 def miscellaneous_menu():
     print(c.light_blue + "               MISCELLANEOUS              " + c.reset)
     print(c.light_green + "[1]" + c.reset + " - Install all tools")
-    print(c.light_cyan + "[2]" + c.reset + " - Back to main menu")
+    print(c.light_green + "[2]" + c.reset + " - Install Gnome Terminal")
+    print(c.light_cyan + "[3]" + c.reset + " - Back to main menu")
 
     response = input(" >    ")
     if response == '1':
         tools.install_all_tools()
         main_menu()  # Return to the main menu after installing tools
     elif response == '2':
+        if tools.check_gnome_terminal():
+            print(c.light_green + "Gnome Terminal is already installed" + c.reset)
+        main_menu()
+    elif response == '3':
         main_menu()
     else:
         print(c.light_red + "Enter a valid option" + c.reset)
@@ -116,5 +121,5 @@ def miscellaneous_menu():
 
 try:
     main_menu()
-except KeyboardInterrupt:
+except (KeyboardInterrupt, EOFError):
     print(c.light_red + "Program interrupted by user" + c.reset)

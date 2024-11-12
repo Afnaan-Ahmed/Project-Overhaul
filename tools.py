@@ -22,8 +22,12 @@ def install_tool(tool, install_command):
         print(f"{tool} will not be installed. Returning to the previous menu.")
     sleep(1)
 
-
-
+# Function to check if gnome-terminal is installed
+def check_gnome_terminal():
+    tool = 'gnome-terminal'
+    if check_tool_installed(tool) == False:
+        install_tool(tool, "sudo apt update && sudo apt install gnome-terminal -y")
+        sleep(3)
 
 #     Functions to launch tools:
 
@@ -159,6 +163,7 @@ def install_all_tools():
     subprocess.run("sudo apt update", shell=True)
     
     tools = {
+        "Gnome-terminal": "sudo apt install gnome-terminal -y",
 	    "Whois": "sudo apt install whois -y",
 	    "NSlookup": "sudo apt install nslookup -y",
 	    "Whatweb": "sudo apt install whatweb -y",
