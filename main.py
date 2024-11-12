@@ -31,25 +31,37 @@ def reconnaissance_menu():
     print(c.light_blue + "               RECONNAISSANCE              " + c.reset)
     print(c.light_green + "[1]" + c.reset + " - Whois - (passive)")
     print(c.light_green + "[2]" + c.reset + " - NSlookup - (passive)")
-    print(c.light_green + "[3]" + c.reset + " - Nmap - (active)")
-    print(c.light_green + "[4]" + c.reset + " - Netcat - (active)")
-    print(c.light_cyan + "[5]" + c.reset + " - Back to main menu")
+    print(c.light_green + "[3]" + c.reset + " - Whatweb - (passive)")
+    print(c.light_green + "[4]" + c.reset + " - Nmap - (active)")
+    print(c.light_green + "[5]" + c.reset + " - Netcat - (active)")
+    print(c.light_green + "[6]" + c.reset + " - Gobuster - (active)")
+    print(c.light_green + "[7]" + c.reset + " - Amass - (active)")
+    print(c.light_cyan + "[8]" + c.reset + " - Back to main menu")
     print()
 
     response = input(" >    ")
     if response == '1':
         tools.launch_whois()
-        main_menu()
+        main_menu()  # Return to the main menu after launching the tool
     elif response == '2':
         tools.launch_nslookup()
         main_menu()
     elif response == '3':
-        tools.launch_nmap()
-        main_menu()  # Return to the main menu after launching the tool
+        tools.launch_whatweb()
+        main_menu()
     elif response == '4':
-        tools.launch_netcat()
+        tools.launch_nmap()
         main_menu()
     elif response == '5':
+        tools.launch_netcat()
+        main_menu()
+    elif response == '6':
+        tools.launch_gobuster()
+        main_menu()
+    elif response == '7':
+        tools.launch_amass()
+        main_menu()
+    elif response == '8':
         main_menu()
     else:
         print(c.light_red + "Enter a valid option" + c.reset)

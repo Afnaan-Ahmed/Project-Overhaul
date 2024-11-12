@@ -30,6 +30,24 @@ def install_tool(tool, install_command):
 
 # Reconnaissance Menu
 
+# Launch whois
+def launch_whois():
+    tool = 'whois'
+    if check_tool_installed(tool):
+        print("Launching Whois...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'whois; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install whois -y")
+
+# Launch nslookup
+def launch_nslookup():
+    tool = 'nslookup'
+    if check_tool_installed(tool):
+        print("Launching Nslookup...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'nslookup; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install nslookup -y")
+
 # Launch Nmap
 def launch_nmap():
     tool = 'nmap'
@@ -48,23 +66,34 @@ def launch_netcat():
     else:
         install_tool(tool, "sudo apt update && sudo apt install netcat -y")
 
-# Launch whois
-def launch_whois():
-    tool = 'whois'
+# Launch Gobuster
+def launch_gobuster():
+    tool = 'gobuster'
     if check_tool_installed(tool):
-        print("Launching Whois...")
-        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'whois; exec bash'])
+        print("Launching Gobuster...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'gobuster; exec bash'])
     else:
-        install_tool(tool, "sudo apt update && sudo apt install whois -y")
+        install_tool(tool, "sudo apt update && sudo apt install gobuster -y")
 
-# Launch nslookup
-def launch_nslookup():
-    tool = 'nslookup'
+# Launch Amass
+def launch_amass():
+    tool = 'amass'
     if check_tool_installed(tool):
-        print("Launching Nslookup...")
-        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'nslookup; exec bash'])
+        print("Launching Amass...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'amass; exec bash'])
     else:
-        install_tool(tool, "sudo apt update && sudo apt install nslookup -y")
+        install_tool(tool, "sudo apt update && sudo apt install amass -y")
+
+# Launch Whatweb
+def launch_whatweb():
+    tool = 'whatweb'
+    if check_tool_installed(tool):
+        print("Launching Whatweb...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'whatweb; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install whatweb -y")
+
+
 
 
 
@@ -130,10 +159,13 @@ def install_all_tools():
     subprocess.run("sudo apt update", shell=True)
     
     tools = {
-	    "Nmap": "sudo apt install nmap -y",
-        "Netcat": "sudo apt install netcat -y",
 	    "Whois": "sudo apt install whois -y",
 	    "NSlookup": "sudo apt install nslookup -y",
+	    "Whatweb": "sudo apt install whatweb -y",
+	    "Nmap": "sudo apt install nmap -y",
+        "Netcat": "sudo apt install netcat -y",
+	    "Gobuster": "sudo apt install gobuster -y",
+	    "Amass": "sudo apt install amass -y",
         "Metasploit": "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall",
         "SQLmap": "sudo apt install sqlmap -y",
     	"Hashcat": "sudo apt install hashcat -y",
