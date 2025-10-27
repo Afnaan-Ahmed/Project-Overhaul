@@ -305,15 +305,15 @@ def install_all_tools():
         "SQLmap": "sudo apt install sqlmap -y",
     	"Hashcat": "sudo apt install hashcat -y",
         "John The Ripper": "sudo apt install john -y",
-        "Crunch": "sudo apt install crunch",
-        "Cewl": "sudo apt install cewl",
-        "Cupp": "sudo apt install cupp",
-        "Hydra": "sudo apt install hydra",
-        "Medusa": "sudo apt install medusa",
+        "Crunch": "sudo apt install crunch -y",
+        "Cewl": "sudo apt install cewl -y",
+        "Cupp": "sudo apt install cupp -y",
+        "Hydra": "sudo apt install hydra -y",
+        "Medusa": "sudo apt install medusa -y",
         "aircrack-ng": "sudo apt install aircrack-ng -y",
-        "Wireshark": "sudo apt install wireshark",
+        "Wireshark": "sudo apt install wireshark -y",
 	    "dsniff": "sudo apt install dsniff -y",
-        "ettercap": "sudo apt install ettercap-graphical"
+        "ettercap": "sudo apt install ettercap-graphical -y"
     }
 
     installation_success = True  # Flag to track if all installations succeed
