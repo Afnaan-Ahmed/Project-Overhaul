@@ -61,6 +61,15 @@ def launch_nmap():
     else:
         install_tool(tool, "sudo apt update && sudo apt install nmap -y")
 
+# Launch Arp-scan
+def launch_arpscan():
+    tool = 'arp-scan'
+    if check_tool_installed(tool):
+        print("Launching Arp-scan...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'arp-scan; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install arp-scan -y")
+ 
 # Launch Netcat
 def launch_netcat():
     tool = 'netcat'
@@ -97,13 +106,6 @@ def launch_whatweb():
     else:
         install_tool(tool, "sudo apt update && sudo apt install whatweb -y")
 
-
-
-
-
-
-# Exploitation Menu
-
 # Launch Metasploit
 def launch_metasploit():
     tool = 'msfconsole'
@@ -111,7 +113,7 @@ def launch_metasploit():
         print("Launching Metasploit...")
         subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'msfconsole; exec bash'])
     else:
-        install_tool(tool, "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall")
+        install_tool(tool, "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall && rm msfinstall")
 
 # Launch SQLmap
 def launch_sqlmap():
@@ -149,8 +151,131 @@ def launch_aircrack():
     else:
         install_tool(tool, "sudo apt update && sudo apt install aircrack-ng -y")
 
+# Launch Hydra
+def launch_hydra():
+    tool = 'hydra'
+    if check_tool_installed(tool):
+        print("Launching Hydra...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'hydra; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install hydra -y")
 
+# Launch Medusa
+def launch_medusa():
+    tool = 'medusa'
+    if check_tool_installed(tool):
+        print("Launching Medusa...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'medusa; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install medusa -y")
 
+# Launch Wireshark
+def launch_wireshark():
+    tool = 'wireshark'
+    if check_tool_installed(tool):
+        print("Launching Wireshark...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'wireshark; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install wireshark -y")
+
+# Launch Ettercap in GUI mode
+def launch_ettercap():
+    tool = 'ettercap-graphical'
+    if check_tool_installed(tool):
+        print("Launching Ettercap...")
+        subprocess.run("ettercap -G",shell=True)
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install ettercap-graphical -y")
+
+# Launch Netdiscover
+def launch_netdiscover():
+    tool = 'netdiscover'
+    if check_tool_installed(tool):
+        print("Launching Netdiscover...")
+        subprocess.run(['gnome-terminal', '--', 'bash', '-c', 'netdiscover; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install netdiscover -y")
+
+# Launch NBTscan
+def launch_nbtscan():
+    tool = 'nbtscan'
+    if check_tool_installed(tool):
+        print("Launching NBTscan...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'nbtscan; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install nbtscan -y")
+
+# Launch SMBmap
+def launch_smbmap():
+    tool = 'smbmap'
+    if check_tool_installed(tool):
+        print("Launching SMBmap...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'smbmap; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install smbmap -y")
+
+# Launch DNSenum
+def launch_dnsenum():
+    tool = 'dnsenum'
+    if check_tool_installed(tool):
+        print("Launching DNSenum...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'dnsenum; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install dnsenum -y")
+
+# Launch dsniff
+def launch_dsniff():
+    tool = 'dsniff'
+    if check_tool_installed(tool):
+        print("Launching dsniff...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'dsniff; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install dsniff -y")
+
+# Launch ARPspoof
+def launch_arpspoof():
+    tool = 'arpspoof'
+    if check_tool_installed(tool):
+        print("Launching Arpspoof...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'arpspoof; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install dsniff -y")
+
+# Launch Crunch
+def launch_crunch():
+    tool = 'crunch'
+    if check_tool_installed(tool):
+        print("Launching Crunch...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'crunch; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install crunch -y")
+
+# Launch cewl
+def launch_cewl():
+    tool = 'cewl'
+    if check_tool_installed(tool):
+        print("Launching cewl...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'cewl; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install cewl -y")
+
+# Launch cupp
+def launch_cupp():
+    tool = 'cupp'
+    if check_tool_installed(tool):
+        print("Launching Cupp...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'cupp; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install cupp -y")
+
+# Launch SEToolkit
+def launch_setoolkit():
+    tool = 'setoolkit'
+    if check_tool_installed(tool):
+        print("Launching setoolkit...")
+        subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', 'setoolkit; exec bash'])
+    else:
+        install_tool(tool, "sudo apt update && sudo apt install setoolkit -y")
 
 
 
@@ -168,14 +293,27 @@ def install_all_tools():
 	    "NSlookup": "sudo apt install nslookup -y",
 	    "Whatweb": "sudo apt install whatweb -y",
 	    "Nmap": "sudo apt install nmap -y",
-        "Netcat": "sudo apt install netcat -y",
+        "Netcat": "sudo apt install netcat-traditional -y",
+	    "NBTscan": "sudo apt install nbtscan -y",
+	    "SMBmap": "sudo apt install smbmap -y",
+	    "DNSenum": "sudo apt install dnsenum -y",
+        "Arp-Scan":"sudo apt install arp-scan -y",
+        "Netdiscover": "sudo apt install netdiscover",
 	    "Gobuster": "sudo apt install gobuster -y",
 	    "Amass": "sudo apt install amass -y",
-        "Metasploit": "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall",
+        "Metasploit": "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall && rm msfinstall",
         "SQLmap": "sudo apt install sqlmap -y",
     	"Hashcat": "sudo apt install hashcat -y",
         "John The Ripper": "sudo apt install john -y",
-        "aircrack-ng": "sudo apt install aircrack-ng -y"
+        "Crunch": "sudo apt install crunch",
+        "Cewl": "sudo apt install cewl",
+        "Cupp": "sudo apt install cupp",
+        "Hydra": "sudo apt install hydra",
+        "Medusa": "sudo apt install medusa",
+        "aircrack-ng": "sudo apt install aircrack-ng -y",
+        "Wireshark": "sudo apt install wireshark",
+	    "dsniff": "sudo apt install dsniff -y",
+        "ettercap": "sudo apt install ettercap-graphical"
     }
 
     installation_success = True  # Flag to track if all installations succeed
